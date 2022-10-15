@@ -1,5 +1,5 @@
 import styled from "styled-components"
-export const Container = styled.button`
+export const StyledButton = styled.button`
    background: var(--rosa);
    color: "#f5f5f5";
    height: 45px;

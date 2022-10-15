@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import { Home } from '../Pages/Home/Home.jsx';
 import { Register } from '../Pages/Register/Register.jsx';
 import { Login } from '../Pages/Login/Login.jsx';
-import { Dashboard } from '../Pages/Dashboard/Dashboard.jsx';
+import { Dashboard } from "../Pages/Dashboard/Dashboard.jsx"
 import {  useState } from 'react';
 
 export function Navegando () {

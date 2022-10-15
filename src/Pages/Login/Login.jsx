@@ -29,6 +29,7 @@ export function Login ({authenticated, setAuthenticated}){
 
 
     const onSubmitFunction = (data) =>{
+        console.log(data)
         api.post("/sessions", data).then((res) =>{
             localStorage.setItem("@KenzieHub:User", JSON.stringify(res.data.user))
             localStorage.setItem("@KenzieHub:token", JSON.stringify(res.data.token));

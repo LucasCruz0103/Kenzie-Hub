@@ -12,11 +12,16 @@ export default createGlobalStyle`
     --vanilla: #f1ede0;
     --black: #000000;
     --orange: #c85311;
-    --rosa:#FF577F
+    --rosa:#FF577F;
+    --gray-4: #121214;
+    --gray-3: #212529;
+    --gray-2: #343b41;
+    --gray-1: #868e96;
+    --gray-0: #f8f9fa;
 }
 body {
     background: var(--vanilla);
-    color: var(--black);
+    color: var(--gray-4);
 }
 body, input, button {
     font-family: "Inter";

@@ -1,8 +1,8 @@
 import React from "react";
-import { Container } from "./style.js";
+import { StyledButton } from "./style.js";
 export function Button ({children, ...rest}) {
-   return (  <Container {...rest}>
+   return (  <StyledButton {...rest}>
      {children}
-    </Container>
+    </StyledButton>
    )
 }
