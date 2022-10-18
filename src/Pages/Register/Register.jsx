@@ -1,14 +1,16 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Button } from "../../Components/Button/Button";
 import  {Input} from "../../Components/Input/Input"
 import { Container, Contem, Animacao} from "./style.js";
 import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import { api } from "../../Services/api";
-import {toast} from 'react-toastify';
-export function Register ({authenticated} ) {
+import { CadastrandoContext } from "../../contexts/CadastrandoContext";
+import { useContext } from "react";
+export function Register () {
     const navigate = useNavigate();
+    const { onSubmitFunction } = useContext(CadastrandoContext);
+
 
       const schema = yup.object().shape({
           name: yup.string().required("Campo Obrigatório"),
@@ -16,9 +18,6 @@ export function Register ({authenticated} ) {
           bio: yup.string().required("Campo obrigatório!"),
          contact: yup.string().required("Campo obrigatório!")
         ,
-        //   /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/,
-        //   "errado"
-        //  ),
           password: yup.string().required("Campo Obrigatório").matches(
             /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,15}$/,
             "deve conter ao menos 8 caracteres, uma letra minúscula, uma letra maiúscula e um número "
@@ -34,24 +33,6 @@ export function Register ({authenticated} ) {
     } = useForm({
         resolver: yupResolver(schema),
     });
-
-
-    const onSubmitFunction = (data) =>{
-        delete data.confirmPassword;
-        api.post("/users", data).then((res) =>{
-            toast.success('Dados do usuário cadastrado com Sucesso!!!');
-            
-            navigate('/login', {data});
-        }).catch((err) =>{
-           toast.error(err.response.data.message);;
-           
-        })
-    }
-
-    
-    if(authenticated){
-        return <Navigate to="dashboard" />
-    }
 
     return <Container>
        <Contem>

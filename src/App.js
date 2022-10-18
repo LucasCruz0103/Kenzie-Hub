@@ -1,15 +1,15 @@
 import { Navegando } from './Routes/Routes';
-import GlobalStyle from './Styles/Global';
-
 import 'react-toastify/dist/ReactToastify.css';
 import{ToastContainer} from 'react-toastify';
+import {Provider} from './contexts/Provider';
 export function App() {
   return (
     <>
-      <GlobalStyle />
+  <Provider>
+      <Navegando />
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -17,11 +17,14 @@ export function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
-    <Navegando />
+        theme="light"
+        />
+      <ToastContainer />
+  </Provider>
     </>
   )
 }
+
 
     
   

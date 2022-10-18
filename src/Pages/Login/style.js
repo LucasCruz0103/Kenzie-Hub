@@ -1,13 +1,13 @@
 import styled from "styled-components";
 export const MainContainer = styled.div`
-background-color: #212529;
+background-color: var( --gray-3);
 height: 900px;;
 `
 export const Container = styled.div`
  height: 100%;
  display: flex;
  align-items: center;
- background-color:  #121214;
+ background-color:  var( --gray-4);
  margin-bottom: 600px;
 `;
 
@@ -30,7 +30,7 @@ export const Animacao = styled.div`
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   background-color:#212529;
+   background-color:var( --gray-3);
    
    
    form {
@@ -52,7 +52,7 @@ export const Animacao = styled.div`
         margin-top: 8px;
     }
     section{
-        background-color:#868E96;
+        background-color:var(--gray-1);
         height: 45px;
         border-radius: 8px;
         border: 2px solid var(--black);
@@ -61,7 +61,7 @@ export const Animacao = styled.div`
         width:90%;
         margin-left: 18px;
         button{
-            background-color:#868E96;
+            background-color:var(--gray-1);
             text-align: center;
             border:none;
             padding:11px;

@@ -4,7 +4,7 @@ export const Container = styled.div`
  height: 100%;
  display: flex;
  align-items: center;
- background-color:  #121214;
+ background-color:  var(--gray-4);
  
 `;
 
@@ -23,7 +23,7 @@ export const Contem = styled.div`
         width:340px;
         justify-content: space-between;
         button{
-            background-color:#212529;
+            background-color:var(--gray-3);
             width:65px;
             border-radius:2px;
             border: 2px solid var(--black)
@@ -47,7 +47,7 @@ export const Animacao = styled.div`
     text-align: center;
     justify-content: center;
     color: whitesmoke;
-    background-color: #212529;
+    background-color: var(--gray-3);
  
     h2{
         margin-bottom: 18px;

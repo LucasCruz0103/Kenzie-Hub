@@ -1,78 +1,69 @@
-import { Navigate } from "react-router-dom";
-import { Container,Nav,Header, DivTitle, Contem, DivModal, DivTech } from "./style.js";
-import { ImPlus } from 'react-icons/im';
-import { Card } from "../../Components/Card/index.jsx";
-import { api } from "../../Services/api.js";
-import { useEffect, useState } from "react"
-import { ModalRegister } from "../../Components/ModalRegister/index.jsx";
-import { Button } from "../../Components/Button/Button.jsx";
-export function Dashboard  ( {authenticated, setAuthenticated } ) {
-    const [ showModal, setShowModal ] = useState( false )
-    const [ tech, setTech ] = useState( [] )
-    
-    
-     const  openModal  =  () => {
-       setShowModal(previousValue => !previousValue)
-    }
-  
-    const handleClickBack = () => {
-      localStorage.clear()
-      setAuthenticated(false)
-      
-    }
-  
-    const [token] = useState( JSON.parse( localStorage.getItem( '@KenzieHub:token' ) ) || '' )
-    const [ user ] = useState( JSON.parse( localStorage.getItem( '@KenzieHub:user' ) ) || '' )
-    
-    useEffect( () => {
-      async function logando(){
+import {  useNavigate } from "react-router-dom";
+import {ModalRegister} from "../../Components/ModalRegister/index"
+import {List} from "../../Components/List/index";
+import { useContext } from "react";
+import { Container,Main,Hr,Header,MainTechnology,Titulo,Tec,Loading} from "./style";
+import { AuthContext } from "./../../contexts/AuthContext";
+import  {TecContext}  from "./../../contexts/TecContext";
+export function Dashboard() {
+  const { user, } = useContext(TecContext);
 
-        await api.get( `/users/${ user.id }`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      } ).then( response => {
-       setTech(response.data.techs)
-      })
-      }
-      logando()
-  }, [])
-  if ( !authenticated ) {
-       Navigate('/login') 
+  const {
+    time,
+    technology,
+    add,
+    checkAdd,
+    filtered,
+  } = useContext(AuthContext);
+  const navigate = useNavigate();
+  if (time) {
+    return <p>Carregando pagina</p>;
   }
 
+  function sair () {
+    navigate("/");
+    window.localStorage.clear();
+  };
 
-  return(
-     <Container>
-      <Nav>
-          <h1>Kenzie hub</h1>
-          <button onClick={() => handleClickBack()}>Sair</button>
-      </Nav>
-      <hr/>
+  return user ? (
+    <Container>
+      <Main>
+        <h1>Kenzie Hub</h1>
+        <button onClick={sair}>Sair</button>
+      </Main>
+      <Hr></Hr>
+
       <Header>
-          <h2>Olá,{user.name}</h2>
-          <span>{user.course_module}</span>
+        <p>Olá, {user.name}</p>
+        <span>{user.course_module}</span>
       </Header>
-      <hr />
-      <Contem>
-      <DivTitle>
-        <h2>Tecnologias</h2>
-        <Button onClick={ openModal }><ImPlus /></Button>
-        
-      </DivTitle>
-      <DivModal>
-        { showModal && 
-          <ModalRegister showModal={ showModal } setShowModal={ setShowModal }>
-          </ModalRegister>  
-        }
-      </DivModal>
-    </Contem>
-    <DivTech>
-      {tech.map(newTech => <Card key={newTech.id} newTech={ newTech } />)}
-    </DivTech>
-  </Container>
-)
+      <Hr></Hr>
+      <MainTechnology>
+        <Titulo>
+          <p>Tecnologias</p>
+          <button onClick={() => checkAdd(false)}> + </button>
+        </Titulo>
+        {add && <ModalRegister />}
+
+        <Tec>
+          {technology.map((elem, index) => (
+            <List index={index} elem={elem} func={filtered} />
+          ))}
+        </Tec>
+      </MainTechnology>
+    </Container>
+  ) : (
+    <Loading>
+      <h1>Você não está logado, clique aqui para ir a home.</h1>
+      <button onClick={() => navigate("/")}>Home</button>
+    </Loading>
+  );
 }
+
+
+
+
+ 
 
         
 

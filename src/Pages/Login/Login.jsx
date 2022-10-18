@@ -5,11 +5,11 @@ import {Input} from "../../Components/Input/Input"
 import { Container, Contem, Animacao, MainContainer } from "./style.js"
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import { api } from "../../Services/api";
-import {toast} from 'react-toastify';
-export function Login ({authenticated, setAuthenticated}){
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+export function Login (){
+    const { onSubmitFunction } = useContext(AuthContext)
     const navigate = useNavigate();
-
       const schema = yup.object().shape({
          
           email: yup.string().email("Email Obrigatório"),
@@ -27,22 +27,6 @@ export function Login ({authenticated, setAuthenticated}){
         resolver: yupResolver(schema),
     });
 
-
-    const onSubmitFunction = (data) =>{
-        console.log(data)
-        api.post("/sessions", data).then((res) =>{
-            localStorage.setItem("@KenzieHub:User", JSON.stringify(res.data.user))
-            localStorage.setItem("@KenzieHub:token", JSON.stringify(res.data.token));
-            setAuthenticated(true)
-            navigate("/dashboard");
-
-        }).catch((error) =>{
-            toast.error(error.response.data.message);
-        })
-    }
-      if(authenticated){
-          navigate('/dashboard');
-      }
     return <MainContainer>
      <Container>
        <Contem>

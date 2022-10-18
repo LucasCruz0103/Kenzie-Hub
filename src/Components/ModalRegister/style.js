@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background: #000;
-  width: 320px;
+  width: 240px;
   height: 340px;
   z-index: 10;
   position: absolute;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   background: var(--gray-2);
-  width: 320px;
+  width: 240px;
   height: 40px;
   display: flex;
   justify-content: space-between;
