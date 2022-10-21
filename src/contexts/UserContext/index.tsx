@@ -15,8 +15,8 @@ interface iUserContext {
     handleLogout: () => void,
     handleRegister: (data: iRegisterData) => void,
     isLoading: boolean,
-    isWaiting: boolean,
-    setIsWaiting: (state: boolean) => void
+    isValidate: boolean,
+    setisValidate: (state: boolean) => void,
 }
 
 interface iUserProvider {
@@ -26,13 +26,13 @@ interface iUserProvider {
 export function UserProvider({ children }: iUserProvider): JSX.Element {
     const [user, setUser] = useState<iAPIData>({} as iAPIData)
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [isWaiting, setIsWaiting] = useState<boolean>(false)
+    const [isValidate, setisValidate] = useState<boolean>(false)
 
     const navigate = useNavigate()
 
     const handleRegister = (data: iRegisterData) => {
         delete data.confirmPassword
-        setIsWaiting(true)
+        setisValidate(true)
 
         postRegister(data)
         .then(() => {
@@ -40,11 +40,11 @@ export function UserProvider({ children }: iUserProvider): JSX.Element {
             navigate('/', {replace: true})
         })
         .catch(() => errorToast('Ocorreu um erro!'))
-        .finally(() => setIsWaiting(false))
+        .finally(() => setisValidate(false))
     }
 
     const handleLogin = (data: iUserLogin) => {
-        setIsWaiting(true)
+        setisValidate(true)
 
         postLogin(data)
         .then((response) => {
@@ -55,8 +55,12 @@ export function UserProvider({ children }: iUserProvider): JSX.Element {
             navigate('/dashboard', {replace: true})
         })
         .catch(() => errorToast('Usuário não encontrado!'))
-        .finally(() => setIsWaiting(false))
+        .finally(() =>{setisValidate(false) 
+            setIsLoading(false)
+        })
     }
+    
+
 
     const handleLogout = () => {
         localStorage.clear()
@@ -75,11 +79,15 @@ export function UserProvider({ children }: iUserProvider): JSX.Element {
             })
             .catch((error) => console.log(error))
             .finally(() => setIsLoading(false))
+        }else{
+            return(
+                navigate("/",{replace: true})
+            )
         }
     }, [])
     
     return(
-        <UserContext.Provider value={{ user, handleLogin, handleLogout, handleRegister, isLoading, isWaiting, setIsWaiting }}>
+        <UserContext.Provider value={{ user, handleLogin, handleLogout, handleRegister, isLoading, isValidate, setisValidate }}>
             {children}
         </UserContext.Provider>
     )

@@ -1,42 +1,42 @@
 import styled from "styled-components";
 
-const colorGeral = (color?: string) => color === 'pink' ? 'color: var(--color-primary);' : color === 'grey' ? 'color: var(--grey-1);' : 'color: var(--grey-0);'
+const corGeral = (color?: string) => color === 'pink' ? 'color: var(--color-primary);' : color === 'grey' ? 'color: var(--grey-1);' : 'color: var(--grey-0);'
 
-export const Title1 = styled.h1`
+export const PrimeiroTitulo = styled.h1`
     font-size: 1.20rem;
     font-weight: 700;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
-export const Title2 = styled.h2`
+export const SegundoTitulo = styled.h2`
     font-size: 1rem;
     font-weight: 600;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
-export const Title3 = styled.h3`
+export const TerceiroTitulo = styled.h3`
     font-size: 0.93rem;
     font-weight: 700;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
-export const Headline = styled.p`
+export const PrimeiraLegenda = styled.p`
     font-size: 0.75rem;
     font-weight: 400;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
-export const HeadlineBold = styled.p`
+export const SegundaLegenda = styled.p`
     font-size: 0.75rem;
     font-weight: 600;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
-export const HeadlineItalic = styled.p`
+export const TerceiraLegenda = styled.p`
     font-size: 0.75rem;
     font-weight: 600;
     font-style: italic;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `
 
 export const Label = styled.label`
@@ -45,5 +45,5 @@ export const Label = styled.label`
     gap: 1rem;
     font-size: 0.75rem;
     font-weight: 400;
-    ${({color}) => colorGeral(color)}
+    ${({color}) => corGeral(color)}
 `

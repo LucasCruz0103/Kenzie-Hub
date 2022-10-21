@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { SmallButton } from "../../Components/Buttons/style" 
-import { Headline,Title1,Title2 } from "../../Components/Typography/style"
+import { MeuBotao } from "../../Components/Buttons/style" 
+import { PrimeiraLegenda,PrimeiroTitulo,SegundoTitulo } from "../../Components/Typography/style"
 import { Container, Contem } from "./style"
-import { IconButton } from "../../Components/Buttons/style" 
+import { IconeButton } from "../../Components/Buttons/style" 
 import { BsPlusLg } from 'react-icons/bs'
 import { Card } from "../../Components/Card"
 import { Modal } from "../../Components/Modal"
@@ -16,7 +16,7 @@ import { iTechs } from "../../Services/getProfile"
 export function Dashboard() {
     const [techList, setTechList] = useState<iTechs[]>([])
     
-    const { user, handleLogout, isLoading, isWaiting } = useContext(UserContext)
+    const { user, handleLogout, isValidate,isLoading } = useContext(UserContext)
     
     const { isOpenModalTech, isOpenModalEditTech, setIsOpenModalTech, setIsOpenModalEditTech, setCurrentId, setCurrentTitle, setCurrentStatus } = useContext(ModalContext)
 
@@ -37,25 +37,25 @@ export function Dashboard() {
                 <Container>
                     {
                         isOpenModalTech &&
-                            <Modal setModalState={setIsOpenModalTech} setTechList={setTechList} />
+                            <Modal setModal={setIsOpenModalTech} setTechLista={setTechList} />
                     }
 
                     {
                         isOpenModalEditTech &&
-                            <Modal type='edit' setModalState={setIsOpenModalEditTech} setTechList={setTechList} />
+                            <Modal type='edit' setModal={setIsOpenModalEditTech} setTechLista={setTechList} />
                     }
 
                     <header>
                         <Contem>
-                            <Title1 color="pink">Kenzie Hub</Title1>
-                            <SmallButton onClick={handleLogout}>Sair</SmallButton>
+                            <PrimeiroTitulo color="pink">Kenzie Hub</PrimeiroTitulo>
+                            <MeuBotao onClick={handleLogout}>Sair</MeuBotao>
                         </Contem>
                     </header>
 
                     <section>
                         <Contem>
-                            <Title1>Olá, {user.name}</Title1>
-                            <Headline color="grey">{user.course_module}</Headline>
+                            <PrimeiroTitulo>Olá, {user.name}</PrimeiroTitulo>
+                            <PrimeiraLegenda color="grey">{user.course_module}</PrimeiraLegenda>
                         </Contem>
                     </section>
 
@@ -63,8 +63,8 @@ export function Dashboard() {
                     <main>
                         <Contem>
                             <div>
-                                <Title2>Tecnologias</Title2>
-                                <IconButton onClick={() => setIsOpenModalTech(true)}><BsPlusLg /></IconButton>
+                                <SegundoTitulo>Tecnologias</SegundoTitulo>
+                                <IconeButton onClick={() => setIsOpenModalTech(true)}><BsPlusLg /></IconeButton>
                             </div>
 
                             <ul>
@@ -75,7 +75,7 @@ export function Dashboard() {
                                             setCurrentId(id!)
                                             setCurrentTitle(title)
                                             setCurrentStatus(status)
-                                        }} key={index} technology={title} level={status}/>)
+                                        }} key={index} technologia={title} nivel={status}/>)
                                     :
                                         <h4 className="no-item">Nenhuma técnolgia, até o momento.</h4>
                                 }
@@ -83,7 +83,7 @@ export function Dashboard() {
                         </Contem>
                     </main>
                     {
-                        isWaiting &&
+                        isLoading &&
                         <Loading/>
                     }
                 </Container>

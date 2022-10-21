@@ -1,5 +1,5 @@
 import { Container, Contem, Header, Main, Form } from "./style"
-import { Title3 } from "../Typography/style"
+import { TerceiroTitulo } from "../Typography/style"
 import { MdOutlineClose } from 'react-icons/md'
 import { createRef, useContext, useEffect } from "react"
 import { Label } from "../Typography/style"
@@ -17,14 +17,14 @@ import * as yup from 'yup'
 
 interface iModal {
     type?: string,
-    setModalState: (state: boolean) => void,
-    setTechList: (state: iTechs[]) => void
+    setModal: (state: boolean) => void,
+    setTechLista: (state: iTechs[]) => void
 }
 
-export function Modal({ type, setModalState, setTechList }:iModal): JSX.Element {
+export function Modal({ type, setModal, setTechLista }:iModal): JSX.Element {
     const modalRef = createRef<HTMLDivElement>()
 
-    const { setIsWaiting } = useContext(UserContext)
+    const { setisValidate } = useContext(UserContext)
 
     const { setIsOpenModalTech, setIsOpenModalEditTech, currentId, currentTitle, currentStatus } = useContext(ModalContext)
 
@@ -45,7 +45,7 @@ export function Modal({ type, setModalState, setTechList }:iModal): JSX.Element 
     useEffect(() => {
         const handleOnClick = (event: MouseEvent) => {
             if(!modalRef.current?.contains(event.target as Element)) {
-                setModalState(false)
+                setModal(false)
             }
         }
 
@@ -57,32 +57,32 @@ export function Modal({ type, setModalState, setTechList }:iModal): JSX.Element 
     }, [])
 
     const handleNewTech = (data: iTechs) => {
-        setIsWaiting(true)
+        setisValidate(true)
 
         api.post('users/techs', data)
         .then(() => {
             api.get('profile')
             .then((response) => {
-                setTechList(response.data.techs)
+                setTechLista(response.data.techs)
             })
             .catch((error) => console.log(error))
-            .finally(() => setIsWaiting(false))
+            .finally(() => setisValidate(false))
             
             successToast('Tecnologia criada com sucesso!')
             setIsOpenModalTech(false)
         })
         .catch(() => errorToast('Tecnologia já existente!'))
-        .finally(() => setIsWaiting(false))
+        .finally(() => setisValidate(false))
     }
 
     const handleEditTech = ({ status }: iTechs) => {
-        setIsWaiting(true)
+        setisValidate(true)
 
         api.put(`users/techs/${currentId}`, {status})
         .then(() => {
             api.get('profile')
             .then((response) => {
-                setTechList(response.data.techs)
+                setTechLista(response.data.techs)
             })
             .catch((error) => console.log(error))
 
@@ -90,20 +90,20 @@ export function Modal({ type, setModalState, setTechList }:iModal): JSX.Element 
             setIsOpenModalEditTech(false)
         })
         .catch(() => errorToast('Ocorreu um erro!'))
-        .finally(() => setIsWaiting(false))
+        .finally(() => setisValidate(false))
     }
 
     const handleRemoveItem = () => {
-        setIsWaiting(true)
+        setisValidate(true)
 
         api.delete(`users/techs/${currentId}`)
         .then(() => {
             api.get('profile')
             .then((response) => {
-                setTechList(response.data.techs)
+                setTechLista(response.data.techs)
             })
             .catch((error) => console.log(error))
-            .finally(() => setIsWaiting(false))
+            .finally(() => setisValidate(false))
 
             successToast('Tecnologia excluída com sucesso!')
             setIsOpenModalEditTech(false)
@@ -115,8 +115,8 @@ export function Modal({ type, setModalState, setTechList }:iModal): JSX.Element 
         <Container>
             <Contem ref={modalRef}>
                 <Header>
-                    <Title3>{type === 'edit' ? 'Tecnologia Detalhes' : 'Cadastrar Tecnologia'}</Title3>
-                    <MdOutlineClose onClick={() => setModalState(false)}/>
+                    <TerceiroTitulo>{type === 'edit' ? 'Tecnologia Detalhes' : 'Cadastrar Tecnologia'}</TerceiroTitulo>
+                    <MdOutlineClose onClick={() => setModal(false)}/>
                 </Header>
                 
                 <Main>

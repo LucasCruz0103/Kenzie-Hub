@@ -7,7 +7,7 @@ export interface iLoading {
 export  function Loading({ isOpaque }: iLoading): JSX.Element {
     return(
         <Container isOpaque={isOpaque}>
-            <div className="loader"></div>
+            <div className="carregando"></div>
         </Container>
     )
 }

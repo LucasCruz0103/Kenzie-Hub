@@ -1,5 +1,5 @@
 import { Container, Contem, Form } from "./style"
-import { Title1, Label } from '../../Components/Typography/style'
+import { PrimeiroTitulo, Label } from '../../Components/Typography/style'
 import { Input } from '../../Components/Input/style'
 import { Button } from '../../Components/Buttons/style'
 import { Loading }  from '../../Components/Loading'
@@ -12,7 +12,7 @@ import { iUserLogin } from "../../Services/postLogin"
 import * as yup from 'yup'
 
 export function Login() {
-    const { handleLogin, isWaiting } = useContext(UserContext)
+    const { handleLogin, isValidate } = useContext(UserContext)
 
     const navigate = useNavigate()
 
@@ -27,9 +27,9 @@ export function Login() {
 
     return(
         <Container>
-            <Title1 color="pink">Kenzie Hub</Title1>
+            <PrimeiroTitulo color="pink">Kenzie Hub</PrimeiroTitulo>
             <Contem>
-                <Title1>Login</Title1>
+                <PrimeiroTitulo>Login</PrimeiroTitulo>
 
                 <Form onSubmit={handleSubmit(handleLogin)}>
                     <Label>Email 
@@ -56,7 +56,7 @@ export function Login() {
                 <Button status='disabled' onClick={() => navigate('/register', {replace: true})}>Cadastrar</Button>
             </Contem>
             {
-                isWaiting && 
+                isValidate && 
                 <Loading/>
             }
         </Container>

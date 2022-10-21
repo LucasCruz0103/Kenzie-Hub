@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
        <ToastContainer 
-                position="top-center"
+                position="top-right"
                 theme='dark'
                 transition={Slide}
                 autoClose={3000}

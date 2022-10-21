@@ -29,7 +29,7 @@ export const Button = styled.button<iButton>`
     }
 `
 
-export const SmallButton = styled.button`
+export const MeuBotao = styled.button`
     background-color: var(--grey-3);
     padding: .5rem 1rem;
     font-size: .75rem;
@@ -42,7 +42,7 @@ export const SmallButton = styled.button`
     }
 `
 
-export const IconButton = styled.button`
+export const IconeButton = styled.button`
     background-color: var(--grey-3);
     padding: .5625rem .5625rem .375rem .5625rem;
     border: none;

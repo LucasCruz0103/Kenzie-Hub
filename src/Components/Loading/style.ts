@@ -18,7 +18,7 @@ export const Container = styled.div<iLoading>`
     min-height: 100vh;
     position: fixed;
     background-color: ${({isOpaque}) => isOpaque ? 'var(--grey-4)' : 'rgba(18, 18, 20, 0.5)'};
-    .loader {
+    .carregando {
         border: .5rem solid var(--grey-1);
         border-top: .5rem solid var(--color-primary);
         border-radius: 50%;

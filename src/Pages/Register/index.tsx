@@ -1,7 +1,7 @@
 import { Container, Contem, Form } from '../Login/style'
 import { RegisterStyled } from './style'
-import { Title1, Label, Headline } from '../../Components/Typography/style'
-import { Button, SmallButton } from '../../Components/Buttons/style'
+import { PrimeiroTitulo, Label, PrimeiraLegenda } from '../../Components/Typography/style'
+import { Button, MeuBotao } from '../../Components/Buttons/style'
 import { useNavigate } from 'react-router-dom'
 import {Input} from '../../Components/Input/style'
 import {Select} from '../../Components/Select/style'
@@ -26,7 +26,7 @@ export function Register() {
         resolver: yupResolver(registerSchema)
     })
 
-    const { handleRegister, isWaiting } = useContext(UserContext)
+    const { handleRegister, isValidate } = useContext(UserContext)
 
     const navigate = useNavigate()
 
@@ -34,14 +34,14 @@ export function Register() {
         <RegisterStyled>
             <Container className='container-register'>
                 <div className='menu'>
-                    <Title1 color='pink'>Kenzie Hub</Title1>
-                    <SmallButton onClick={() => navigate('/', {replace: true})}>Voltar</SmallButton>
+                    <PrimeiroTitulo color='pink'>Kenzie Hub</PrimeiroTitulo>
+                    <MeuBotao onClick={() => navigate('/', {replace: true})}>Voltar</MeuBotao>
                 </div>
 
                 <Contem>
-                    <Title1>Crie sua conta</Title1>
+                    <PrimeiroTitulo>Crie sua conta</PrimeiroTitulo>
 
-                    <Headline className='subtext'>Rapido e grátis, vamos nessa</Headline>
+                    <PrimeiraLegenda className='subtext'>Rapido e grátis, vamos nessa</PrimeiraLegenda>
 
                     <Form onSubmit={handleSubmit(handleRegister)}>
                         <Label>Nome 
@@ -110,7 +110,7 @@ export function Register() {
                     </Form>
                 </Contem>
                 {
-                    isWaiting && 
+                    isValidate && 
                     <Loading/>
                 }
             </Container>

@@ -1,19 +1,19 @@
 
-import { Title3, Headline } from '../Typography/style'
+import { TerceiroTitulo, PrimeiraLegenda } from '../Typography/style'
 import {Container} from './style'
 
 interface iCard {
-    technology: string,
-    level: string,
+    technologia: string,
+    nivel: string,
     onClick: () => void
 }
 
-export  function Card({ technology, level, onClick }: iCard): JSX.Element {
+export  function Card({ technologia, nivel, onClick }: iCard): JSX.Element {
     return(
         <Container onClick={onClick}>
-            <Title3>{technology}</Title3>
+            <TerceiroTitulo>{technologia}</TerceiroTitulo>
             <div>
-                <Headline color='grey'>{level}</Headline>
+                <PrimeiraLegenda color='grey'>{nivel}</PrimeiraLegenda>
             </div>
         </Container>
     )
